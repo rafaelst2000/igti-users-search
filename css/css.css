@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+  .grid-8 {
+    width: 100%;
+  }
+}
+textarea:focus,
+input:focus,
+select:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+input {
+  margin-top: 10px;
+  width: 90%;
+  height: 40px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+  padding-left: 10px;
+}
+button {
+  width: 10%;
+  float: right;
+  height: 40px;
+  margin-top: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+body {
+  background-color: #2d3848;
+}
+header {
+  background-color: #f1f1f1;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+.container {
+  margin-top: 30px;
+}
+.result {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.grid-8 {
+  border-radius: 10px;
+  background-color: #3a4556;
+  padding: 20px 20px 20px 20px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #ffffff;
+  font-family: "Roboto", sans-serif !important;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  line-height: 1.5em;
+}
+
+hr {
+  top: 10px;
+  border: 1px #2d3848 solid;
+}
+
+img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.item {
+  overflow: auto;
+  display: flex;
+  margin-top: 10px;
+}
+
+.item p {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+}
+
+.switch {
+  position: relative;
+  margin-top: 3px;
+  margin-left: 10px;
+  width: 60px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 10px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
