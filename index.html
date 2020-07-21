@@ -25,26 +25,19 @@
     <section>
       <div class="container">
         <div class="grid-8 result">
-          <h1>30 Usuários encontrados</h1>
+          <h1 id="usersQuant"></h1>
           <hr />
-          <div class="container-item">
-            <div class="item">
-              <img src="./riven.jpeg" alt="Foto" />
-              <p>Riven, ? anos</p>
-            </div>
-          </div>
+          <div class="container-item"></div>
         </div>
         <div class="grid-8">
-          <h1>Estatísticas</h1>
-          <hr />
-          <h2>Sexo masculino: 100</h2>
-          <h2>Sexo feminino: 100</h2>
-          <h2>Soma das idades: 1.745</h2>
-          <h2>Média das idades: 52.88</h2>
-          <input placeholder="Digite algo..." type="text" />
-          <button disabled type="submit"><i class="fa fa-search"></i></button>
+          <div class="estatics"></div>
+          <input id="input" placeholder="Digite algo..." type="text" />
+          <button onclick="handleClick()" id="button">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
       </div>
     </section>
   </body>
+  <script src="./script.js"></script>
 </html>
