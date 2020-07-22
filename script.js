@@ -1,12 +1,13 @@
+let color = 0;
 let search = null;
 let totalUsers = null;
 let users = [];
 let usersFilted = [];
 let statistics = {
-  totalGenderFemale: 0,
-  totalGenderMale: 0,
+  totalFemale: 0,
+  totalMale: 0,
   totalAge: 0,
-  avgAge: 0,
+  average: 0,
 };
 totalUsers = document.querySelector("#usersQuant");
 totalUsers.innerHTML = "Nenhum usuário pesquisado";
@@ -15,28 +16,36 @@ inputSearch = document.querySelector("#input");
 let userList = document.querySelector(".container-item");
 let title = document.createElement("h1");
 let hr = document.createElement("hr");
-let totalGenderFemale = document.createElement("h2");
-let totalGenderMale = document.createElement("h2");
+let totalFemale = document.createElement("h2");
+let totalMale = document.createElement("h2");
 let totalAge = document.createElement("h2");
-let avgAge = document.createElement("h2");
+let average = document.createElement("h2");
 
 window.addEventListener("load", async () => {
+  clear();
   users = await getUsers();
-  usersFilted = users;
-
   inputSearch.addEventListener("keyup", filterUsers);
-
-  listStatistics(usersFilted);
 });
 
+const changecolor = (event) => {
+  color++;
+  if (color % 2 == 0) {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  } else {
+    var element = document.body;
+    element.classList.toggle("light-mode");
+  }
+};
+
 const filterUsers = async (event) => {
+  clear();
   const filter = event.target.value.toLowerCase();
   var hasText = !!filter && filter.trim() !== "";
   if (hasText) {
     usersFilted = await users.filter((user) => {
       return user.name.toLowerCase().includes(filter);
     });
-
     if (event.key === "Enter") {
       clear();
       listUsers(usersFilted);
@@ -45,14 +54,15 @@ const filterUsers = async (event) => {
   }
 };
 
-clear = () => {
-  let listStatistics = document.querySelector(".estatics");
+const clear = () => {
+  let listStatistics = document.querySelector(".statistics");
   listStatistics.innerHTML = "";
   title.textContent = "Estatísticas";
-  avgAge.textContent = `Sem dados.`;
+  average.textContent = `Sem dados.`;
+  totalUsers.innerHTML = "Nenhum usuário pesquisado";
 
   listStatistics.appendChild(title);
-  listStatistics.appendChild(avgAge);
+  listStatistics.appendChild(average);
   userList.innerHTML = "";
 };
 
@@ -113,36 +123,34 @@ const listUsers = (users) => {
     });
 };
 
-const listStatistics = async (users) => {
-  let listStatistics = document.querySelector(".estatics");
+const listStatistics = (users) => {
+  let listStatistics = document.querySelector(".statistics");
   listStatistics.innerHTML = "";
-  statistics.totalAge = await users.reduce((acc, cur) => {
+  statistics.totalAge = users.reduce((acc, cur) => {
     return acc + cur.age;
   }, 0);
-  statistics.avgAge = statistics.totalAge / users.length;
-  statistics.totalGenderMale = 0;
-  statistics.totalGenderFemale = 0;
-  await users.forEach((user) => {
-    statistics.totalGenderMale =
-      user.gender === "male"
-        ? ++statistics.totalGenderMale
-        : statistics.totalGenderMale;
-    statistics.totalGenderFemale =
+  statistics.average = statistics.totalAge / users.length;
+  statistics.totalMale = 0;
+  statistics.totalFemale = 0;
+  users.forEach((user) => {
+    statistics.totalMale =
+      user.gender === "male" ? ++statistics.totalMale : statistics.totalMale;
+    statistics.totalFemale =
       user.gender === "female"
-        ? ++statistics.totalGenderFemale
-        : statistics.totalGenderFemale;
+        ? ++statistics.totalFemale
+        : statistics.totalFemale;
   });
 
   title.textContent = "Estatísticas";
-  totalGenderMale.textContent = `Sexo Masculino: ${statistics.totalGenderMale}`;
-  totalGenderFemale.textContent = `Sexo Feminino: ${statistics.totalGenderFemale}`;
+  totalMale.textContent = `Sexo Masculino: ${statistics.totalMale}`;
+  totalFemale.textContent = `Sexo Feminino: ${statistics.totalFemale}`;
   totalAge.textContent = `Soma das idades: ${statistics.totalAge}`;
-  avgAge.textContent = `Média de idades: ${statistics.avgAge.toFixed(2)}`;
+  average.textContent = `Média de idades: ${statistics.average.toFixed(2)}`;
 
   listStatistics.appendChild(title);
   listStatistics.appendChild(hr);
-  listStatistics.appendChild(totalGenderMale);
-  listStatistics.appendChild(totalGenderFemale);
+  listStatistics.appendChild(totalMale);
+  listStatistics.appendChild(totalFemale);
   listStatistics.appendChild(totalAge);
-  listStatistics.appendChild(avgAge);
+  listStatistics.appendChild(average);
 };
